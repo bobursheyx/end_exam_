@@ -53,7 +53,6 @@ def expenses(request):
         queryset = queryset.filter(
             name__icontains=request.GET.get('search'))
 
-    # Calculate the total sum
     total_sum = sum(expense.price for expense in queryset)
 
     context = {'expenses': queryset, 'total_sum': total_sum}
@@ -133,7 +132,6 @@ def login_page(request):
     return render(request, "login.html")
 
 
-# Register page for user
 def register_page(request):
     if request.method == "POST":
         try:
@@ -154,7 +152,6 @@ def register_page(request):
     return render(request, "register.html")
 
 
-# Logout function
 def custom_logout(request):
     logout(request)
     return redirect('login')
@@ -206,9 +203,7 @@ def pdf(request):
         queryset = queryset.filter(
             name__icontains=request.GET.get('search'))
 
-    # Calculate the total sum
     total_sum = sum(expense.price for expense in queryset)
-    # Get the username
     username = request.user.username
 
     context = {'expenses': queryset, 'total_sum': total_sum, 'username': username}
